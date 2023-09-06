@@ -8,8 +8,14 @@ export class DogsService {
     @InjectModel(DogsEntity) private readonly repository: typeof DogsEntity,
    
   ) {}
+
   public async getList(): Promise<Dogs[]> {
     const result = await this.repository.findAll();
     return result;
+  }
+
+  public async create(value: Dogs): Promise<Dogs> {
+    const result = await this.repository.create(value);
+    return result?.toJSON();
   }
 }
